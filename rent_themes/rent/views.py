@@ -1,8 +1,7 @@
 from django.shortcuts import redirect, render
 
-from rent_themes.rent.services.services import Util
 from .models import *
-from .services import *
+from .services.util import Util
 
 #Página inicial com a lista de clientes
 def index(request):
@@ -196,17 +195,23 @@ class RentViews:
                  city = request.POST['city'],
                  state = request.POST['state'] )
         a.save()
-        r = Rent(date=request.POST['date'], 
+        
+        client_id = int(request.POST['select_client'])
+        theme_id = int(request.POST['select_theme'])
+        date = request.POST['date']
+
+    
+        # Calcular desconto
+        util = Util()
+        desconto = util.calculaDesconto(theme_id, client_id, date )
+        r = Rent(date=date, 
                  start_hours=request.POST['start_hours'],
                  end_hours=request.POST['end_hours'],
                  client_id= request.POST['select_client'],
                  theme_id = request.POST['select_theme'],
-                 address = a )
-        
-        
-        util = Util()
-        desconto = util.calculaDesconto(request.POST['select_theme'], request.POST['select_client'])
-        r.value = desconto
+                 address = a,
+                 value = desconto, 
+                 )
         
         r.save()
         return redirect('/listRent')

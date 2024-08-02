@@ -11,6 +11,8 @@
                         <th scope="col">Tema</th>
                         <th scope="col">Cliente</th>
                         <th scope="col">Data Aluguel</th>
+                        <th scope="col">Valor Tema</th>
+                        <th scope="col">Valor D.</th>
                         <th scope="col">Hora início</th>
                         <th scope="col">Hora Fim</th>
                         <th scope="col">Ações</th>
@@ -23,6 +25,8 @@
                         <td width='170'>{{rent.theme.name}}</td>
                         <td width='170'>{{rent.client.name}}</td>
                         <td width='170'>{{rent.date}}</td>
+                        <td width='170'>R$ {{rent.theme.price}}</td>
+                        <td width='170'>R$ {{rent.value}}</td>
                         <td width='170'>{{rent.start_hours}}</td>
                         <td width='170'>{{rent.end_hours}}</td>
                         <td width='70'><a href="/deleteRent/{{rent.id}}">Excluir</a></td>
